@@ -1,0 +1,67 @@
+sensor.dark_sky_apparent_temperature:
+  friendly_name: Current Temp
+sensor.dark_sky_daytime_high_temperature:
+  friendly_name: High
+sensor.dark_sky_precip_probability:
+  friendly_name: Precip
+sensor.dark_sky_overnight_low_temperature:
+  friendly_name: Low
+device_tracker.danphone:
+  friendly_name: Dan
+device_tracker.brookephone:
+  friendly_name: Brooke
+sensor.dark_sky_summary:
+  friendly_name: Dark Sky
+sensor.envoy_current_energy_consumption:
+  friendly_name: Consumption
+sensor.envoy_todays_energy_production:
+  friendly_name: Production
+sensor.slyphone_battery_state:
+  hidden: true
+sun.sun:
+  hidden: true
+automation.alarm_going_off:
+  homebridge_hidden: true
+automation.both_gone:
+  homebridge_hidden: true
+automation.disarm_the_alarm:
+  homebridge_hidden: true
+media_player.all_rooms:
+  hidden: true
+media_player.bathroom_speaker:
+  friendly_name: Garage Speaker
+media_player.un55fh6030_un55fh6030:
+  friendly_name: Samsung TV
+sensor.slyphone_battery_level:
+  hidden: true
+sensor.usps_mail:
+  friendly_name: USPS Mail
+  sensor.usps_packages:
+    friendly_name: USPS Packages
+device_tracker.bedroom:
+  friendly_name: BedroomMiniWifi
+  hidden: true
+device_tracker.chromecast_audio_2:
+  hidden: true
+device_tracker.chromecast_audio:
+  hidden: true
+device_tracker.den:
+  friendly_name: DenCastWifi
+  hidden: true
+device_tracker.google_home_mini_2:
+  hidden: true
+device_tracker.google_home_mini:
+  hidden: true
+device_tracker.google_home_mini_3:
+  hidden: true
+device_tracker.google_home_mini_4:
+  hidden: true
+device_tracker.envoy:
+  hidden: true
+device_tracker.roku_hd_564:
+  hidden: true
+device_tracker.roku_3_897:
+  hidden: true
+device_tracker.homemate_device:
+  friendly_name: HomeMate Cube
+  hidden: true

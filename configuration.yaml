@@ -1,0 +1,118 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles 
+  # Customization file
+  customize: !include customize.yaml
+
+alarm_control_panel:
+  - platform: !secret alarm_platform
+    username: !secret alarm_username
+    password: !secret alarm_password
+
+device_tracker:
+  - platform: unifi
+    host: pi.hole
+    username: danlinn
+    password: !secret unifi_pw
+    verify_ssl: False
+    ssid_filter:
+      - 'Linns'
+
+# camera:
+#   - platform: generic
+#     name: USPS Mail Pictures
+#     still_image_url: !secret still_image_url
+
+ios:
+  push:
+    categories:
+    - name: alarm
+      identifier: 'alarm'
+      actions:
+      - identifier: 'SOUND_ALARM'
+        title: 'Let it go'
+        activationMode: 'background'
+        authenticationRequired: no
+        destructive: no
+        behavior: 'default'
+      - identifier: 'SILENCE_ALARM'
+        title: 'Silence Alarm'
+        activationMode: 'background'
+        authenticationRequired: no
+        destructive: yes
+        behavior: 'default'
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  base_url: https://danlinn.duckdns.org
+#  api_password: !secret api_password
+  ssl_certificate: /etc/dehydrated/certs/danlinn.duckdns.org/fullchain.pem
+  ssl_key: /etc/dehydrated/certs/danlinn.duckdns.org/privkey.pem
+
+# Discover some devices automatically
+discovery:
+
+# mqtt:
+#   password: !secret mqtt-pw
+
+# Sensors
+sensor:
+    #Weather prediction
+  - platform: yr
+    # Solar
+  - platform: enphase_envoy
+#    monitored_conditions:
+#    - daily_production
+#    - daily_consumption
+#     # Travel
+  - platform: waze_travel_time
+    name: !secret d_work_name
+    origin: !secret d_origin
+    destination: !secret d_destination
+    region: 'US'
+  - platform: waze_travel_time
+    name: !secret b_work_name
+    origin: !secret b_origin
+    destination: !secret b_destination
+    region: 'US'
+    # Weather
+  - platform: darksky
+    api_key: !secret ds_key
+    monitored_conditions:
+    - summary
+    - precip_probability
+    - apparent_temperature
+    - temperature_high
+    - temperature_low
+#   - platform: mqtt
+#     name: 'USPS Mail'
+#     state_topic: '/usps/mails'
+#     value_template: "{{ value }}"
+#   - platform: mqtt
+#     name: USPS Packages
+#     state_topic: '/usps/packages'
+#     value_template: "{{ value }}"
+
+# Text to speech
+tts:
+  - platform: google_translate    
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+    base_url: https://danlinn.duckdns.org
+    service_name: google_say
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

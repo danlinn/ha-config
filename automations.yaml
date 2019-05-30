@@ -1,0 +1,55 @@
+- id: '1538804071534'
+  alias: Both gone
+  trigger:
+  - entity_id: device_tracker.brookephone
+    from: home
+    platform: state
+    to: not_home
+  - entity_id: device_tracker.danphone
+    from: home
+    platform: state
+    to: not_home
+  condition:
+  - condition: state
+    entity_id: device_tracker.brookephone
+    state: not_home
+  - condition: state
+    entity_id: device_tracker.slyphone
+    state: not_home
+  action:
+  - service: alarm_control_panel.alarm_arm_home
+- id: '1538805091881'
+  alias: Arm at night
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - service: alarm_control_panel.alarm_arm_home
+- id: '1234123'
+  alias: Alarm Going Off
+  trigger:
+  - entity_id: alarm_control_panel.total_connect
+    platform: state
+    to: triggered
+  action:
+    service: notify.ios_danphone
+    data:
+      message: Something happened at home!
+      data:
+        push:
+          badge: 1
+          category: alarm
+        action_data:
+          entity_id: light.test
+          my_custom_data: foo_bar
+- id: '432112341321432'
+  alias: Disarm the alarm
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: SILENCE_ALARM
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.total_connect
