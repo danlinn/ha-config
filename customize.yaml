@@ -65,3 +65,17 @@ device_tracker.roku_3_897:
 device_tracker.homemate_device:
   friendly_name: HomeMate Cube
   hidden: true
+device_tracker.tanners_phone:
+  hidden: true
+device_tracker.64_b5_c6_18_21_9a:
+  hidden: true
+device_tracker.galaxy_note5:
+  hidden: true
+device_tracker.qca4002:
+  hidden: true
+device_tracker.esp_465c32:
+  hidden: true
+device_tracker.esp_4b831d:
+  hidden: true
+device_tracker.sa66_outreach1:
+  hidden: true
